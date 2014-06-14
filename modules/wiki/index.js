@@ -2,6 +2,8 @@ var express = require("express");
 var request = require("request");
 var swig = require("swig");
 
+var utils = require("../../utils");
+
 var app = express();
 
 // Stop swig from escaping data
@@ -9,13 +11,8 @@ swig.setDefaults({
     autoescape: false
 });
 
-// Force the accept header to a certin value
-var forceAccept = function(mimeType) {
-    return function(req, res, next) {
-        req.headers.accept = mimeType;
-        next();
-    };
-};
+// Google analytics
+app.use(utils.ga);
 
 // IP address
 var getWiki = function(req, res) {
@@ -43,8 +40,8 @@ var getWiki = function(req, res) {
     });
 };
 app.get("/:query", getWiki);
-app.get("/:query/json", forceAccept("application/json"), getWiki);
-app.get("/:query/txt", forceAccept("text/plain"), getWiki);
+app.get("/:query/json", utils.forceAccept("application/json"), getWiki);
+app.get("/:query/txt", utils.forceAccept("text/plain"), getWiki);
 
 module.exports = app;
 

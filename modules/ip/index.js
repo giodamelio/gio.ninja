@@ -2,6 +2,8 @@ var express = require("express");
 var request = require("request");
 var swig = require("swig");
 
+var utils = require("../../utils");
+
 var app = express();
 
 // Get ip address
@@ -11,23 +13,7 @@ app.use(function(req, res, next) {
 });
 
 // Google analytics
-app.use(function(req, res, next) {
-    // Ignore favicon requests
-    if (req.path == "/favicon.ico") return next();
-
-    req.visitor.pageview(req.vhost.hostname + req.path, function(err) {
-        if (err) console.log(err);
-    });
-    next();
-});
-
-// Force the accept header to a certin value
-var forceAccept = function(mimeType) {
-    return function(req, res, next) {
-        req.headers.accept = mimeType;
-        next();
-    };
-};
+app.use(utils.ga);
 
 // IP address
 var getIp = function(req, res) {
@@ -46,8 +32,8 @@ var getIp = function(req, res) {
     });
 };
 app.get("/", getIp);
-app.get("/json", forceAccept("application/json"), getIp);
-app.get("/txt", forceAccept("text/plain"), getIp);
+app.get("/json", utils.forceAccept("application/json"), getIp);
+app.get("/txt", utils.forceAccept("text/plain"), getIp);
 
 // GeoIP info
 var getGeoIp = function(req, res) {
@@ -77,8 +63,8 @@ var getGeoIp = function(req, res) {
     });
 };
 app.get("/geoip", getGeoIp);
-app.get("/geoip/json", forceAccept("application/json"), getGeoIp);
-app.get("/geoip/txt", forceAccept("text/plain"), getGeoIp);
+app.get("/geoip/json", utils.forceAccept("application/json"), getGeoIp);
+app.get("/geoip/txt", utils.forceAccept("text/plain"), getGeoIp);
 
 module.exports = app;
 
