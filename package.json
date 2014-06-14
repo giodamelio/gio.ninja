@@ -4,5 +4,8 @@
   "description": "Shotcut",
   "author": "Gio d'Amelio",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.4.3"
+  }
 }
