@@ -10,6 +10,17 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Google analytics
+app.use(function(req, res, next) {
+    // Ignore favicon requests
+    if (req.path == "/favicon.ico") return next();
+
+    req.visitor.pageview(req.vhost.hostname + req.path, function(err) {
+        if (err) console.log(err);
+    });
+    next();
+});
+
 // Force the accept header to a certin value
 var forceAccept = function(mimeType) {
     return function(req, res, next) {
