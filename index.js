@@ -1,11 +1,7 @@
 var express = require("express");
 var vhost = require("vhost");
-var ua = require("universal-analytics");
 
 var app = express();
-
-// Setup google analytics
-app.use(ua.middleware(process.env.GOOGLE_ANALYTICS_ID, {cookieName: "_ga"}));
 
 // Pick domain
 var base;

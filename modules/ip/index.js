@@ -12,9 +12,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-// Google analytics
-app.use(utils.ga);
-
 // IP address
 var getIp = function(req, res) {
     res.format({

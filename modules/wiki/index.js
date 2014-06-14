@@ -11,9 +11,6 @@ swig.setDefaults({
     autoescape: false
 });
 
-// Google analytics
-app.use(utils.ga);
-
 // IP address
 var getWiki = function(req, res) {
     request({
