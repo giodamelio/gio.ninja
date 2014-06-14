@@ -6,6 +6,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.4.3"
+    "express": "^4.4.3",
+    "vhost": "^2.0.0"
   }
 }
