@@ -11,7 +11,7 @@ swig.setDefaults({
     autoescape: false
 });
 
-// IP address
+// Wiki
 var getWiki = function(req, res) {
     request({
         method: "GET",
@@ -20,17 +20,17 @@ var getWiki = function(req, res) {
         var data = JSON.parse(body).query.pages;
         data = data[Object.keys(data)[0]];
         res.format({
-            "text": function() {
+            "text/plain": function() {
                 // Get rid of the html tags
                 data.extract = data.extract.replace(/<(?:.|\n)*?>/gm, "");
                 res.send(data.extract);
             },
-            "html": function() {
+            "text/html": function() {
                 swig.renderFile(__dirname + "/wiki.html", data, function(error, html) {
                     res.send(html);
                 });
             },
-            "json": function() {
+            "application/json": function() {
                 res.json(data);
             }
         });
