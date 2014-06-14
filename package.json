@@ -1,0 +1,8 @@
+{
+  "name": "gio.ninja",
+  "version": "0.1.0",
+  "description": "Shotcut",
+  "author": "Gio d'Amelio",
+  "main": "index.js",
+  "license": "MIT"
+}
