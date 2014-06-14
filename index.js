@@ -14,6 +14,9 @@ if (process.env.NODE_ENV == "production") {
 // Ip address info
 app.use(vhost("ip." + base, require("./modules/ip")));
 
+// Wikipedia summery
+app.use(vhost("wiki." + base, require("./modules/wiki")));
+
 app.get("/", function(req, res){
     res.send("Hello World");
 });
