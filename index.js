@@ -11,6 +11,15 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Ignore favicon requests
+app.use(function(req, res, next) {
+    if (req.path == "/favicon.ico") {
+        res.send(404);
+    } else {
+        next();
+    }
+});
+
 // Setup keen.io
 var keenio = keen.configure({
     projectId: process.env.KEEN_IO_ID,
@@ -18,9 +27,6 @@ var keenio = keen.configure({
 });
 app.use(function(req, res, next) {
     req.on("end", function() {
-        // Ignore favicon requests
-        if (req.path == "/favicon.ico") return;
-        
         // Get content type
         var contentType;
         if (res._headers["content-type"]) {
