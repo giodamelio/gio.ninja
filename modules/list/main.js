@@ -1,31 +1,11 @@
 var app = angular.module("list", []);
 
-app.controller("main", function($scope) {
-    $scope.modules = [
-        {
-            name: ["list"],
-            url: "list.gio.ninja/",
-            description: "This list"
-        },
-        {
-            name: ["wiki"],
-            url: "wiki.gio.ninja/$1",
-            description: "Quickly get first paragraph of a wikipedia article",
-            args: {
-                "$1": "Search Term"
-            }
-        },
-        {
-            name: ["ip"],
-            url: "ip.gio.ninja/",
-            description: "Echo your ip address",
-        },
-        {
-            name: ["geoip"],
-            url: "ip.gio.ninja/geoip",
-            description: "Echo geoip data"
-        }
-    ];
+app.controller("main", function($scope, $http) {
+    $scope.modules = [];
+    $http.get("/list.json")
+        .success(function(data) {
+            $scope.modules = data;
+        });
 
     // Filter the modules
     $scope.searchInput = "";
