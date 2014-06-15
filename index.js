@@ -67,6 +67,9 @@ app.use(vhost("wiki." + base, require("./modules/wiki")));
 // RPG Dice
 app.use(vhost("rpg." + base, require("./modules/rpg")));
 
+// Google Cache
+app.use(vhost("gc." + base, require("./modules/google-cache")));
+
 // Stats
 app.use(vhost("stats." + base, require("./modules/stats")));
 
