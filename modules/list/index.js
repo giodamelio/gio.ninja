@@ -19,7 +19,13 @@ MODULE_LIST = MODULE_LIST.concat({
     url: "list.gio.ninja/",
     description: "This list"
 });
-MODULE_LIST = MODULE_LIST.sort();
+
+// Sort
+MODULE_LIST = MODULE_LIST.sort(function(a, b) {
+    if (a.name[0] > b.name[0]) return 1;
+    else if (a.name[0] < b.name[0]) return -1;
+    else return 0;
+});
 
 // Module List
 var getList = function(req, res) {
