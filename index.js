@@ -62,6 +62,9 @@ app.use(vhost("ip." + base, require("./modules/ip")));
 // Wikipedia summery
 app.use(vhost("wiki." + base, require("./modules/wiki")));
 
+// RPG Dice
+app.use(vhost("rpg." + base, require("./modules/rpg")));
+
 // List of modules
 app.use(vhost("list." + base, require("./modules/list")));
 app.use(vhost(base, require("./modules/list")));
