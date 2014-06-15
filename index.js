@@ -20,6 +20,14 @@ app.use(function(req, res, next) {
     }
 });
 
+// Pick domain
+var base;
+if (process.env.NODE_ENV == "production") {
+    base = "gio.ninja";
+} else {
+    base = "localhost";
+}
+
 // Setup keen.io
 var keenio = keen.configure({
     projectId: process.env.KEEN_IO_ID,
@@ -34,10 +42,10 @@ app.use(function(req, res, next) {
         } else {
             contentType = "text/html";
         }
-    
+
         // Send event to keen.io
         keenio.addEvent("pageview", {
-            subdomain: req.vhost,
+            subdomain: req.vhost.hostname.split("." + base)[0],
             path: req.path,
             "content-type": contentType,
             ip: req.headers["x-forwarded-for"]
@@ -47,14 +55,6 @@ app.use(function(req, res, next) {
     });
     next();
 });
-
-// Pick domain
-var base;
-if (process.env.NODE_ENV == "production") {
-    base = "gio.ninja";
-} else {
-    base = "localhost";
-}
 
 // Ip address info
 app.use(vhost("ip." + base, require("./modules/ip")));
