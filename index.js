@@ -35,6 +35,8 @@ var keenio = keen.configure({
 });
 app.use(function(req, res, next) {
     req.on("end", function() {
+        if (req.keenioIgnore) return;
+
         // Get content type
         var contentType;
         if (res._headers["content-type"]) {
@@ -48,7 +50,7 @@ app.use(function(req, res, next) {
             subdomain: req.vhost.hostname.split("." + base)[0],
             path: req.path,
             "content-type": contentType,
-            ip: req.headers["x-forwarded-for"]
+            ip: req.headers["x-forwarded-for"] || req.ip
         }, function(error) {
             if (error) console.log(error);
         });
@@ -65,9 +67,19 @@ app.use(vhost("wiki." + base, require("./modules/wiki")));
 // RPG Dice
 app.use(vhost("rpg." + base, require("./modules/rpg")));
 
+// Stats
+app.use(vhost("stats." + base, require("./modules/stats")));
+
 // List of modules
 app.use(vhost("list." + base, require("./modules/list")));
-app.use(vhost(base, require("./modules/list")));
+app.use(function(req, res, next) {
+    req.keenioIgnore = true;
+    if (process.env.NODE_ENV == "production") {
+        res.redirect("http://list." + base);
+    } else {
+        res.redirect("http://list." + base + ":3141");
+    }
+});
 
 console.log("App started on port", process.env.PORT || 3141);
 app.listen(process.env.PORT || 3141);
