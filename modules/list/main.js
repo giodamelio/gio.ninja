@@ -1,4 +1,4 @@
-var app = angular.module("list", []);
+var app = angular.module("list", ["ngSanitize"]);
 
 app.controller("main", function($scope, $http) {
     $scope.modules = [];

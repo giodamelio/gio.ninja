@@ -40,12 +40,13 @@
             <module data="module"></module>
         </div>
         <div class="small-4 columns end">
-            {{module.description}}
+            <div ng-bind-html="module.description"></div>
         </div>
     </div>
 
     <!-- Angular -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.8/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-sanitize.min.js"></script>
     <!-- My JS -->
     <script src="/main.js"></script>
 </body>
