@@ -56,10 +56,9 @@ app.use(vhost("ip." + base, require("./modules/ip")));
 // Wikipedia summery
 app.use(vhost("wiki." + base, require("./modules/wiki")));
 
-
-app.get("/", function(req, res){
-    res.send("Hello World");
-});
+// List of modules
+app.use(vhost("list." + base, require("./modules/list")));
+app.use(vhost(base, require("./modules/list")));
 
 console.log("App started on port", process.env.PORT || 3141);
 app.listen(process.env.PORT || 3141);
