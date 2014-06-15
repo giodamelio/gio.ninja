@@ -65,11 +65,13 @@ app.get("/txt", utils.forceAccept("text/plain"), getList);
 
 // My js
 app.get("/main.js", function(req, res) {
-    res.type("script/javascript");
+    req.keenioIgnore = true;
+    res.type("text/javascript");
     fs.createReadStream(__dirname + "/main.js").pipe(res);
 });
 
 app.get("/list.json", function(req, res) {
+    req.keenioIgnore = true;
     res.json(MODULE_LIST);
 });
 
