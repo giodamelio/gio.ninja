@@ -64,4 +64,14 @@ app.get("/geoip/json", utils.forceAccept("application/json"), getGeoIp);
 app.get("/geoip/txt", utils.forceAccept("text/plain"), getGeoIp);
 
 module.exports = app;
+module.exports.properties = [{
+    name: ["ip"],
+    url: "ip.gio.ninja/",
+    description: "Echo your ip address",
+},
+{
+    name: ["geoip"],
+    url: "ip.gio.ninja/geoip",
+    description: "Echo geoip data"
+}];
 

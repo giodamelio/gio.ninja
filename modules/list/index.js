@@ -6,31 +6,20 @@ var utils = require("../../utils");
 
 var app = express();
 
-var MODULE_LIST = [
-        {
-            name: ["list"],
-            url: "list.gio.ninja/",
-            description: "This list"
-        },
-        {
-            name: ["wiki"],
-            url: "wiki.gio.ninja/$1",
-            description: "Quickly get first paragraph of a wikipedia article",
-            args: {
-                "$1": "Search Term"
-            }
-        },
-        {
-            name: ["ip"],
-            url: "ip.gio.ninja/",
-            description: "Echo your ip address",
-        },
-        {
-            name: ["geoip"],
-            url: "ip.gio.ninja/geoip",
-            description: "Echo geoip data"
-        }
-];
+// Get module properties
+var MODULE_LIST = [];
+var files = fs.readdirSync (__dirname + "/..");
+for (var i in files) {
+    if (files[i] == "list") continue;
+    var properties = require("../" + files[i]).properties;
+    MODULE_LIST = MODULE_LIST.concat(properties);
+}
+MODULE_LIST = MODULE_LIST.concat({
+    name: ["list"],
+    url: "list.gio.ninja/",
+    description: "This list"
+});
+MODULE_LIST = MODULE_LIST.sort();
 
 // Module List
 var getList = function(req, res) {

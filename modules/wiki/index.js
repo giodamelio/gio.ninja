@@ -41,4 +41,12 @@ app.get("/:query/json", utils.forceAccept("application/json"), getWiki);
 app.get("/:query/txt", utils.forceAccept("text/plain"), getWiki);
 
 module.exports = app;
+module.exports.properties = {
+    name: ["wiki"],
+    url: "wiki.gio.ninja/$1",
+    description: "Quickly get first paragraph of a wikipedia article",
+    args: {
+        "$1": "Search Term"
+    }
+};
 
