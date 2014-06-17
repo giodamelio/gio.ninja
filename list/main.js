@@ -14,9 +14,18 @@ app.controller("main", function($scope, $http) {
         // Show all the modules the search box is empty
         if ($scope.searchInput === "") return true;
 
-        return module.name.some(function(name) {
-            return name.indexOf($scope.searchInput) != -1;
-        });
+        // Check name
+        var name = module.name.indexOf($scope.searchInput) != -1;
+
+        // Check alias'
+        var alias = false;
+        if (module.alias) {
+            alias = module.alias.some(function(name) {
+                return name.indexOf($scope.searchInput) != -1;
+            });
+        }
+        
+        return name || alias;
     };
 });
 
