@@ -1,10 +1,9 @@
 var express = require("express");
-var request = require("request");
 var swig = require("swig");
 
 var utils = require("../../utils");
 
-var app = express();
+var router = module.exports = express.Router();
 
 // Stop swig from caching data
 swig.setDefaults({
@@ -32,14 +31,7 @@ var getStats = function(req, res) {
         }
     });
 };
-app.get("/", getStats);
-app.get("/json", utils.forceAccept("application/json"), getStats);
-app.get("/txt", utils.forceAccept("text/plain"), getStats);
-
-module.exports = app;
-module.exports.properties = {
-    name: ["stats"],
-    url: "stats.gio.ninja/",
-    description: "Usage stats"
-};
+router.get("/", getStats);
+router.get("/json", utils.forceAccept("application/json"), getStats);
+router.get("/txt", utils.forceAccept("text/plain"), getStats);
 

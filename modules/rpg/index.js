@@ -1,10 +1,9 @@
 var express = require("express");
-var request = require("request");
 var droll = require("droll");
 
 var utils = require("../../utils");
 
-var app = express();
+var router = module.exports = express.Router();
 
 // Wiki
 var rollDice = function(req, res) {
@@ -27,17 +26,7 @@ var rollDice = function(req, res) {
         }
     });
 };
-app.get("/:query", rollDice);
-app.get("/:query/json", utils.forceAccept("application/json"), rollDice);
-app.get("/:query/txt", utils.forceAccept("text/plain"), rollDice);
-
-module.exports = app;
-module.exports.properties = {
-    name: ["rpg", "dice"],
-    url: "rpg.gio.ninja/$1",
-    description: "Simple dice roll. Accepts <a href='http://en.wikipedia.org/wiki/Dice_notation'>standard dice notation</a>",
-    args: {
-        "$1": "Dice Configuration"
-    }
-};
+router.get("/:query", rollDice);
+router.get("/:query/json", utils.forceAccept("application/json"), rollDice);
+router.get("/:query/txt", utils.forceAccept("text/plain"), rollDice);
 

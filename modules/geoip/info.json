@@ -1,0 +1,6 @@
+{
+    "name": ["geoip"],
+    "url": "ip.gio.ninja/geoip",
+    "description": "Echo geoip data"
+}
+

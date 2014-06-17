@@ -1,26 +1,21 @@
 var fs = require("fs");
+var path = require("path");
 
 var express = require("express");
 
-var utils = require("../../utils");
+var utils = require("../utils");
 
-var app = express();
+var router = module.exports = express.Router();
 
-// Get module properties
+// Loop through the modules and get their info
 var MODULE_LIST = [];
-var files = fs.readdirSync (__dirname + "/..");
+var files = fs.readdirSync(path.resolve(__dirname, "../modules"));
 for (var i in files) {
-    if (files[i] == "list") continue;
-    var properties = require("../" + files[i]).properties;
-    MODULE_LIST = MODULE_LIST.concat(properties);
+    var info = require(path.resolve(__dirname, "../modules", files[i]) + "/info.json");
+    MODULE_LIST.push(info);
 }
-MODULE_LIST = MODULE_LIST.concat({
-    name: ["list"],
-    url: "list.gio.ninja/",
-    description: "This list"
-});
 
-// Sort
+// Sort the modules
 MODULE_LIST = MODULE_LIST.sort(function(a, b) {
     if (a.name[0] > b.name[0]) return 1;
     else if (a.name[0] < b.name[0]) return -1;
@@ -59,21 +54,19 @@ var getList = function(req, res) {
         }
     });
 };
-app.get("/", getList);
-app.get("/json", utils.forceAccept("application/json"), getList);
-app.get("/txt", utils.forceAccept("text/plain"), getList);
+router.get("/", getList);
+router.get("/json", utils.forceAccept("application/json"), getList);
+router.get("/txt", utils.forceAccept("text/plain"), getList);
 
 // My js
-app.get("/main.js", function(req, res) {
+router.get("/main.js", function(req, res) {
     req.keenioIgnore = true;
     res.type("text/javascript");
     fs.createReadStream(__dirname + "/main.js").pipe(res);
 });
 
-app.get("/list.json", function(req, res) {
+router.get("/list.json", function(req, res) {
     req.keenioIgnore = true;
     res.json(MODULE_LIST);
 });
-
-module.exports = app;
 

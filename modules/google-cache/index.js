@@ -2,7 +2,7 @@ var express = require("express");
 
 var utils = require("../../utils");
 
-var app = express();
+var router = module.exports = express.Router();
 
 // Google cache
 var getCache = function(req, res) {
@@ -21,17 +21,7 @@ var getCache = function(req, res) {
         }
     });
 };
-app.get("/:query", getCache);
-app.get("/:query/json", utils.forceAccept("application/json"), getCache);
-app.get("/:query/txt", utils.forceAccept("text/plain"), getCache);
-
-module.exports = app;
-module.exports.properties = {
-    name: ["gc", "google-cache"],
-    url: "gc.gio.ninja/$1",
-    description: "Google Cache Version of a page",
-    args: {
-        "$1": "Url"
-    }
-};
+router.get("/:query", getCache);
+router.get("/:query/json", utils.forceAccept("application/json"), getCache);
+router.get("/:query/txt", utils.forceAccept("text/plain"), getCache);
 

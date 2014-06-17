@@ -4,7 +4,7 @@ var swig = require("swig");
 
 var utils = require("../../utils");
 
-var app = express();
+var router = module.exports = express.Router();
 
 // Stop swig from escaping data
 swig.setDefaults({
@@ -36,17 +36,7 @@ var getWiki = function(req, res) {
         });
     });
 };
-app.get("/:query", getWiki);
-app.get("/:query/json", utils.forceAccept("application/json"), getWiki);
-app.get("/:query/txt", utils.forceAccept("text/plain"), getWiki);
-
-module.exports = app;
-module.exports.properties = {
-    name: ["wiki"],
-    url: "wiki.gio.ninja/$1",
-    description: "Quickly get first paragraph of a wikipedia article",
-    args: {
-        "$1": "Search Term"
-    }
-};
+router.get("/:query", getWiki);
+router.get("/:query/json", utils.forceAccept("application/json"), getWiki);
+router.get("/:query/txt", utils.forceAccept("text/plain"), getWiki);
 

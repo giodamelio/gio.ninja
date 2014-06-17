@@ -1,5 +1,4 @@
 var express = require("express");
-var vhost = require("vhost");
 var keen = require("keen.io");
 
 var app = express();
@@ -20,14 +19,7 @@ app.use(function(req, res, next) {
     }
 });
 
-// Pick domain
-var base;
-if (process.env.NODE_ENV == "production") {
-    base = "gio.ninja";
-} else {
-    base = "localhost";
-}
-
+/*
 // Setup keen.io
 var keenio = keen.configure({
     projectId: process.env.KEEN_IO_ID,
@@ -56,9 +48,10 @@ app.use(function(req, res, next) {
         });
     });
     next();
-});
+});*/
 
 // Ip address info
+/*
 app.use(vhost("ip." + base, require("./modules/ip")));
 
 // Wikipedia summery
@@ -71,18 +64,10 @@ app.use(vhost("rpg." + base, require("./modules/rpg")));
 app.use(vhost("gc." + base, require("./modules/google-cache")));
 
 // Stats
-app.use(vhost("stats." + base, require("./modules/stats")));
+app.use(vhost("stats." + base, require("./modules/stats")));*/
 
-// List of modules
-app.use(vhost("list." + base, require("./modules/list")));
-app.use(function(req, res, next) {
-    req.keenioIgnore = true;
-    if (process.env.NODE_ENV == "production") {
-        res.redirect("http://list." + base);
-    } else {
-        res.redirect("http://list." + base + ":3141");
-    }
-});
+// Homepage
+app.use("/", require("./list"));
 
 console.log("App started on port", process.env.PORT || 3141);
 app.listen(process.env.PORT || 3141);
