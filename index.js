@@ -1,6 +1,8 @@
 var express = require("express");
 var keen = require("keen.io");
 
+var subdomainRouter = require("./subdomainRouter");
+
 var app = express();
 
 // Disable cache
@@ -50,21 +52,23 @@ app.use(function(req, res, next) {
     next();
 });*/
 
-// Ip address info
-/*
-app.use(vhost("ip." + base, require("./modules/ip")));
+// Ip echo
+app.use(subdomainRouter("ip", require("./modules/ip")));
+
+// GeoIp data
+app.use(subdomainRouter("geoip", require("./modules/geoip")));
 
 // Wikipedia summery
-app.use(vhost("wiki." + base, require("./modules/wiki")));
+app.use(subdomainRouter("wiki", require("./modules/wiki")));
 
 // RPG Dice
-app.use(vhost("rpg." + base, require("./modules/rpg")));
+app.use(subdomainRouter("rpg", require("./modules/rpg")));
 
 // Google Cache
-app.use(vhost("gc." + base, require("./modules/google-cache")));
+app.use(subdomainRouter("gc", require("./modules/google-cache")));
 
 // Stats
-app.use(vhost("stats." + base, require("./modules/stats")));*/
+app.use(subdomainRouter("stats", require("./modules/stats")));
 
 // Homepage
 app.use("/", require("./list"));
