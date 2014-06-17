@@ -1,3 +1,6 @@
+var fs = require("fs");
+var path = require("path");
+
 var express = require("express");
 var keen = require("keen.io");
 
@@ -52,26 +55,25 @@ app.use(function(req, res, next) {
     next();
 });*/
 
-// Ip echo
-app.use(subdomainRouter("ip", require("./modules/ip")));
+// Loop through the modules and get their info
+var MODULE_LIST = [];
+var files = fs.readdirSync("modules");
+for (var i in files) {
+    var info = require("./modules/" + files[i] + "/info.json");
+    MODULE_LIST.push(info);
+}
 
-// GeoIp data
-app.use(subdomainRouter("geoip", require("./modules/geoip")));
-
-// Wikipedia summery
-app.use(subdomainRouter("wiki", require("./modules/wiki")));
-
-// RPG Dice
-app.use(subdomainRouter("rpg", require("./modules/rpg")));
-
-// Google Cache
-app.use(subdomainRouter("gc", require("./modules/google-cache")));
-
-// Stats
-app.use(subdomainRouter("stats", require("./modules/stats")));
+// Loop through the modules and add their routes
+for (var i in MODULE_LIST) {
+    app.use(subdomainRouter(
+                MODULE_LIST[i].name, 
+                MODULE_LIST[i].alias,
+                require("./modules/" + MODULE_LIST[i].name)
+    ));
+}
 
 // Homepage
-app.use("/", require("./list"));
+app.use("/", require("./list")(MODULE_LIST));
 
 console.log("App started on port", process.env.PORT || 3141);
 app.listen(process.env.PORT || 3141);

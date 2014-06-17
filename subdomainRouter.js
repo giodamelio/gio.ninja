@@ -11,7 +11,9 @@ module.exports = function() {
     } else {
         // Loop through the arguments and add them to the subdomains
         for (var i = 0; i < arguments.length - 1; i++) {
-            if (typeof arguments[i] == "string") {
+            if (arguments[i] === undefined) {
+                continue;
+            } else if (typeof arguments[i] === "string") {
                 subdomains.push(arguments[i]);
             } else {
                 subdomains = subdomains.concat(arguments[i]);
