@@ -1,6 +1,6 @@
 {
-    "name": ["ip"],
-    "url": "ip.gio.ninja/",
+    "name": "ip",
+    "url": "/",
     "description": "Echo your ip address"
 }
 

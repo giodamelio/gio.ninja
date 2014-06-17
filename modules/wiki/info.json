@@ -1,6 +1,7 @@
 {
-    "name": ["wiki"],
-    "url": "wiki.gio.ninja/$1",
+    "name": "wiki",
+    "alias": ["w"],
+    "url": "/$1",
     "description": "Quickly get first paragraph of a wikipedia article",
     "args": {
         "$1": "Search Term"

@@ -34,7 +34,7 @@ var getGeoIp = function(req, res) {
         });
     });
 };
-router.get("/geoip", getGeoIp);
-router.get("/geoip/json", utils.forceAccept("application/json"), getGeoIp);
-router.get("/geoip/txt", utils.forceAccept("text/plain"), getGeoIp);
+router.get("/", getGeoIp);
+router.get("/json", utils.forceAccept("application/json"), getGeoIp);
+router.get("/txt", utils.forceAccept("text/plain"), getGeoIp);
 

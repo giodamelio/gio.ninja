@@ -1,6 +1,7 @@
 {
-    "name": ["rpg", "dice"],
-    "url": "rpg.gio.ninja/$1",
+    "name": "rpg",
+    "alias": ["dice"],
+    "url": "/$1",
     "description": "Simple dice roll. Accepts <a href='http://en.wikipedia.org/wiki/Dice_notation'>standard dice notation</a>",
     "args": {
         "$1": "Dice Configuration"

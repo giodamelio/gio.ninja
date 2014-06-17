@@ -1,6 +1,7 @@
 {
-    "name": ["geoip"],
-    "url": "ip.gio.ninja/geoip",
+    "name": "geoip",
+    "alias": ["gip"],
+    "url": "/",
     "description": "Echo geoip data"
 }
 

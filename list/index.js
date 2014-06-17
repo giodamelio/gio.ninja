@@ -17,8 +17,8 @@ for (var i in files) {
 
 // Sort the modules
 MODULE_LIST = MODULE_LIST.sort(function(a, b) {
-    if (a.name[0] > b.name[0]) return 1;
-    else if (a.name[0] < b.name[0]) return -1;
+    if (a.name > b.name) return 1;
+    else if (a.name < b.name) return -1;
     else return 0;
 });
 
@@ -67,6 +67,9 @@ router.get("/main.js", function(req, res) {
 
 router.get("/list.json", function(req, res) {
     req.keenioIgnore = true;
-    res.json(MODULE_LIST);
+    res.json({
+        list: MODULE_LIST,
+        host: req.headers.host
+    });
 });
 

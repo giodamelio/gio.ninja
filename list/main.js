@@ -5,6 +5,7 @@ app.controller("main", function($scope, $http) {
     $http.get("/list.json")
         .success(function(data) {
             $scope.modules = data;
+
         });
 
     // Filter the modules
@@ -19,14 +20,15 @@ app.controller("main", function($scope, $http) {
     };
 });
 
-app.directive("module", function() {
+app.directive("module", function($location) {
     return {
         restrict: "E",
         scope: {
-            data: "=data"
+            data: "=data",
+            host: "=host"
         },
         link: function(scope, element) {
-            var el = "<code>" + scope.data.url + "</code>";
+            var el = "<code>" + scope.data.name + "." + scope.host + scope.data.url + "</code>";
 
             // Replace args with text boxes
             if (scope.data.args) {
@@ -48,7 +50,9 @@ app.directive("module", function() {
                     for (var i = 0; i < inputs.length; i++) {
                         url = url.replace("$" + (i + 1).toString(), inputs[i].value);
                     }
-                    window.location.href = "http://" + url;
+
+                    // Get base host
+                    window.location.href = "http://" + scope.data.name + "." + scope.host + url;
                 }
             });
 

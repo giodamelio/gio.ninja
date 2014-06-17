@@ -35,9 +35,9 @@
             <input type="text" ng-model="searchInput" placeholder="Search...">
         </div>
     </div>
-    <div class="row space" ng-repeat="module in modules | filter:search">
+    <div class="row space" ng-repeat="module in modules.list | filter:search">
         <div class="small-6 small-offset-1 columns">
-            <module data="module"></module>
+            <module data="module" host="modules.host"></module>
         </div>
         <div class="small-4 columns end">
             <div ng-bind-html="module.description"></div>

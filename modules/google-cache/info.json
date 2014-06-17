@@ -1,6 +1,7 @@
 {
-    "name": ["gc", "google-cache"],
-    "url": "gc.gio.ninja/$1",
+    "name": "google-cache",
+    "alias": ["gc"],
+    "url": "/$1",
     "description": "Google Cache Version of a page",
     "args": {
         "$1": "Url"
