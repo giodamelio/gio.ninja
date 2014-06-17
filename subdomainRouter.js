@@ -26,7 +26,9 @@ module.exports = function() {
     // Check to see if any of the subdomains match
     // If the do, send request to the router
     return function(req, res, next) {
-        if(_.intersection(req.subdomains, subdomains).length > 0) {
+        var validSubdomains = _.intersection(req.subdomains, subdomains);
+        if(validSubdomains.length > 0) {
+            req.subdomain = validSubdomains[0];
             router(req, res, next);
         } else {
             next();

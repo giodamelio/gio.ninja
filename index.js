@@ -24,7 +24,7 @@ app.use(function(req, res, next) {
     }
 });
 
-/*
+
 // Setup keen.io
 var keenio = keen.configure({
     projectId: process.env.KEEN_IO_ID,
@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 
         // Send event to keen.io
         keenio.addEvent("pageview", {
-            subdomain: req.vhost.hostname.split("." + base)[0],
+            subdomain: req.subdomain,
             path: req.path,
             "content-type": contentType,
             ip: req.headers["x-forwarded-for"] || req.ip
@@ -53,7 +53,7 @@ app.use(function(req, res, next) {
         });
     });
     next();
-});*/
+});
 
 // Loop through the modules and get their info
 var MODULE_LIST = [];
