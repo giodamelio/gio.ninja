@@ -18,7 +18,7 @@ module.exports = function(MODULE_LIST) {
     // Module List
     var getList = function(req, res) {
         var spaces = function(st) {
-            var ln = 30 - st.length;
+            var ln = 40 - st.length;
             var spaces = "";
             for (var i = 0; i < ln; i++) {
                 spaces += " ";
@@ -30,7 +30,12 @@ module.exports = function(MODULE_LIST) {
                 var text = "";
                 for (var i in MODULE_LIST) {
                     var module = MODULE_LIST[i];
-                    text += module.url + spaces(module.url) + module.description + "\n";
+                    var base = MODULE_LIST[i].name + "." + req.headers.host + module.url;
+
+                    // Remove html tags from description
+                    module.description = module.description.replace(/<(?:.|\n)*?>/gm, "");
+
+                    text += base + spaces(base) + module.description + "\n";
                     if (module.args) {
                         for (var key in module.args) {
                             text += "    " + key + ": " + module.args[key] + "\n";
