@@ -62,3 +62,10 @@ app.directive("module", function($location) {
     };
 });
 
+// Turn array into comma seperated list
+app.filter("joinComma", function() {
+    return function(input) {
+        return input.join(", ");
+    };
+});
+

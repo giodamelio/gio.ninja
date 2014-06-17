@@ -41,6 +41,9 @@ module.exports = function(MODULE_LIST) {
                             text += "    " + key + ": " + module.args[key] + "\n";
                         }
                     }
+                    if (module.alias) {
+                        text += "    " + "Alias: " + module.alias.join(", ") + "\n";
+                    }
                 }
                 res.send(text);
             },

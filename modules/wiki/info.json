@@ -1,6 +1,6 @@
 {
     "name": "wiki",
-    "alias": ["w"],
+    "alias": ["w", "wikipedia"],
     "url": "/$1",
     "description": "Quickly get first paragraph of a wikipedia article",
     "args": {

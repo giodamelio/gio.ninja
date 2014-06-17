@@ -21,6 +21,12 @@
             margin-top: 1rem;
             height: 24px;
         }
+        .space-left {
+            margin-left: 1rem;
+        }
+        .grey {
+            color: #848484;
+        }
         input {
             width: 200px;
         }
@@ -38,6 +44,9 @@
     <div class="row space" ng-repeat="module in modules.list | filter:search">
         <div class="small-6 small-offset-1 columns">
             <module data="module" host="modules.host"></module>
+            <div ng-if="module.alias">
+                <div class="space-left grey"><sup><span>Alias: </span>{{module.alias | joinComma}}</sup></div>
+            </div>
         </div>
         <div class="small-4 columns end">
             <div ng-bind-html="module.description"></div>
