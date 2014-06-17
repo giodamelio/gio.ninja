@@ -50,7 +50,7 @@
             var viewsBySubdomain = new Keen.Metric("pageview", {
                 analysisType: "count",
                 groupBy: "subdomain",
-                filters: [{"property_name":"subdomain","operator":"ne","property_value":"list"}]
+                filters: [{"property_name":"subdomain","operator":"ne","property_value":"list"},{"property_name":"subdomain","operator":"exists","property_value":true}]
             });
             var viewsBySubdomainPieChart = new Keen.PieChart(viewsBySubdomain, {
                 title: "Views by Subdomain"
