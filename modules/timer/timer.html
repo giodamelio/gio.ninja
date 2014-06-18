@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+    <style>
+        .invisible {
+            display: none;
+        }
+    </style>
     
     <!-- Moment.js -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
@@ -18,10 +24,22 @@
         app.controller("main", function($scope) {
             var path = location.pathname.slice(1).split("/");
             $scope.countTill = moment().add(path[1], path[0]).toDate();
+
+            // Update the title
+            var title = document.getElementsByTagName("title")[0];
+            var span = document.getElementsByClassName("invisible")[0];
+            $scope.$on("timer-tick", function(event, args) {
+                title.textContent = span.textContent;
+            });
         });
     </script>
 </head>
 <body ng-controller="main">
-    <h3><timer end-time="countTill">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds</timer></h3>
+    <h2>
+        <timer end-time="countTill" interval="500">
+            <span>{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds</span>
+            <span id="test" class="invisible">{{hhours}}:{{mminutes}}:{{sseconds}}</span>
+        </timer>
+    </h2>
 </body>
 </html>
