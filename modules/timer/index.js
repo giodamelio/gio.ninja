@@ -1,6 +1,7 @@
 var fs = require("fs");
 
 var express = require("express");
+var moment = require("moment");
 
 var utils = require("../../utils");
 
@@ -10,7 +11,8 @@ var router = module.exports = express.Router();
 var getTimer = function(req, res) {
     res.format({
         "text/plain": function() {
-            res.send("");
+            var end = moment().add(req.params.unit, req.params.increment).toDate();
+            res.send(end + "\n");
         },
         "text/html": function() {
             fs.createReadStream(__dirname + "/timer.html").pipe(res);

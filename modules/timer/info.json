@@ -2,7 +2,7 @@
     "name": "timer",
     "alias": ["t"],
     "url": "/$1/$2",
-    "description": "Echo your ip address",
+    "description": "Count down timer",
     "args": {
         "$1": "Increment",
         "$2": "Unit"
