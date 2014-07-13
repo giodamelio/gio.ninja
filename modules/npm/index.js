@@ -12,15 +12,24 @@ var getNpm = function(req, res) {
     // Get npm info
     var npmBaseUrl = "https://skimdb.npmjs.com/registry/";
     request(npmBaseUrl + req.params.packageName, function(err, response, body) {
+        // Parse the body
+        body = JSON.parse(body);
+
+        // Get info from current version
+        var currentInfo = body.versions[body["dist-tags"].latest];
+
         res.format({
             "text/plain": function() {
-                res.send("");
+                res.send(
+                    currentInfo.name + " v" + currentInfo.version + "\n" +
+                    (currentInfo.homepage || currentInfo.repository.url || "") + "\n"
+                );
             },
             "text/html": function() {
                 res.send("");
             },
             "application/json": function() {
-                res.json(JSON.parse(body));
+                res.json(body);
             }
         });
     });
