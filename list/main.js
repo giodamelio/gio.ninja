@@ -46,6 +46,9 @@ app.directive("module", function($location) {
                         "<input placeholder=\"" + scope.data.args[key] + "\">"
                     );
                 }
+            } else {
+                // If there are no args, make it a link
+                el = "<a href='http://" + scope.data.name + "." + scope.host + scope.data.url + "'>" + el + "</a>";
             }
             
             // Make it an jqLite object
