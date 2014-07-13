@@ -11,14 +11,21 @@ var router = module.exports = express.Router();
 var getTimer = function(req, res) {
     res.format({
         "text/plain": function() {
-            var end = moment().add(req.params.unit, req.params.increment).toDate();
-            res.send(end + "\n");
+            var endTime = moment()
+                .add(req.params.unit, req.params.increment)
+                .toDate();
+            res.send(endTime + "\n");
         },
         "text/html": function() {
             fs.createReadStream(__dirname + "/timer.html").pipe(res);
         },
         "application/json": function() {
-            res.json({});
+            var endTime = moment()
+                .add(req.params.unit, req.params.increment)
+                .toJSON();
+            res.json({
+                endTime: endTime
+            });
         }
     });
 };
