@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
 // Ignore favicon requests
 app.use(function(req, res, next) {
     if (req.path == "/favicon.ico") {
-        res.send(404);
+        res.sendfile(__dirname + "/favicon.ico");
     } else {
         next();
     }
