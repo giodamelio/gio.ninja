@@ -1,0 +1,9 @@
+{
+    "name": "npm",
+    "url": "/$1",
+    "description": "NPM lookup",
+    "args": {
+        "$1": "Package Name"
+    }
+}
+
