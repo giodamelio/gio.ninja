@@ -26,7 +26,11 @@ var getNpm = function(req, res) {
                 );
             },
             "text/html": function() {
-                res.send("");
+                res.redirect(
+                    currentInfo.homepage ||
+                    currentInfo.repository.url ||
+                    "https://www.npmjs.org/package/" + req.params.packageName
+                );
             },
             "application/json": function() {
                 res.json(body);
