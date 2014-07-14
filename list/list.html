@@ -37,13 +37,43 @@
         a > code:hover {
             text-decoration: underline;
         }
+        .top-bar input {
+            height: auto;
+            padding-top: .35rem;
+            padding-bottom: .35rem;
+            font-size: 0.75rem;
+        }
+        .full-width {
+            width: 20rem !important
+        }
     </style>
 <body ng-controller="main">
-    <div class="row top">
-        <div class="small-10 small-offset-1 columns end">
-            <input type="text" ng-model="searchInput" placeholder="Search...">
-        </div>
-    </div>
+    <nav class="top-bar">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a>gio.ninja</a></h1>
+            </li>
+        </ul>
+        <section class="top-bar-section">
+            <ul class="right">
+                <li>
+                    <a>Info</a>
+                </li>
+                <li>
+                    <a href="https://github.com/giodamelio/gio.ninja">Github</a>
+                </li>
+            </ul>
+            <ul class="left">
+                <li class="has-form full-width">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <input type="text" ng-model="searchInput" placeholder="Search...">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </nav>
     <div class="row space" ng-repeat="module in modules.list | filter:search">
         <div class="small-6 small-offset-1 columns">
             <module data="module" host="modules.host"></module>
