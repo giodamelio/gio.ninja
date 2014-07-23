@@ -1,4 +1,5 @@
 var fs = require("fs");
+var path = require("path");
 
 var express = require("express");
 var moment = require("moment");
@@ -32,4 +33,7 @@ var getTimer = function(req, res) {
 router.get("/:increment/:unit", getTimer);
 router.get("/:increment/:unit/json", utils.forceAccept("application/json"), getTimer);
 router.get("/:increment/:unit/txt", utils.forceAccept("text/plain"), getTimer);
+
+// Serve alarm sound
+router.use(express.static(path.join(__dirname,"/public")));
 
