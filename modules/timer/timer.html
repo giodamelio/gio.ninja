@@ -26,9 +26,15 @@
             var title = document.getElementById("title");
 
             // Display the countdown every interval
-            setInterval(function() {
+            var id = setInterval(function() {
                 // Recalculate the duration
                 duration = moment.duration(duration.asMilliseconds() - interval, "milliseconds")
+
+                // If the timer has reached 0, stop it and play the alarm
+                if (duration.asMilliseconds() <= 0) {
+                    clearInterval(id);
+                    var alarm = new Audio("/marimba.mp3").play();
+                }
                 
                 // Get the text equivalent of the duration
                 var prettyDuration = duration.hours() + ":" + duration.minutes() + ":" + duration.seconds();
