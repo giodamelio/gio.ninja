@@ -2,16 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title id="title"></title>
 
     <!-- Moment.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
 
     <!-- My Js -->
     <script>
+        // Set how often we update the display
+        var interval = 1000;
+
+        // Get the time from the url
+        var increment = location.pathname.split("/")[1];
+        var unit = location.pathname.split("/")[2];
+        
+        // Calculate the time to count until
+        var duration = moment.duration(parseInt(increment), unit);
+
+        // Wait until the dom is ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get our display elements
+            var timer = document.getElementById("timer");
+            var title = document.getElementById("title");
+
+            // Display the countdown every interval
+            setInterval(function() {
+                // Recalculate the duration
+                duration = moment.duration(duration.asMilliseconds() - interval, "milliseconds")
+                
+                // Get the text equivalent of the duration
+                var prettyDuration = duration.hours() + ":" + duration.minutes() + ":" + duration.seconds();
+
+                // Set the timer element
+                timer.innerText = prettyDuration;
+
+                // Set the title
+                title.innerText = prettyDuration;
+            }, interval);
+        });
     </script>
 </head>
 <body>
-    <h1>Timer Goes Here</h1>
+    <h1 id="timer"></h1>
 </body>
 </html>
