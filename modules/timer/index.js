@@ -33,10 +33,3 @@ router.get("/:increment/:unit", getTimer);
 router.get("/:increment/:unit/json", utils.forceAccept("application/json"), getTimer);
 router.get("/:increment/:unit/txt", utils.forceAccept("text/plain"), getTimer);
 
-// Countdown js
-router.get("/angular-timer.min.js", function(req, res) {
-    req.keenioIgnore = true;
-    res.type("text/javascript");
-    fs.createReadStream(__dirname + "/angular-timer.min.js").pipe(res);
-});
-
