@@ -31,6 +31,7 @@
             // Get our display elements
             var timer = document.getElementById("timer");
             var title = document.getElementById("title");
+            var progress = document.getElementById("progress");
 
             // Initilize our duration
             var duration = orignalDuration;
@@ -47,14 +48,19 @@
                 }
                 
                 // Get the text equivalent of the duration
-                var prettyDuration = pad(duration.hours(), 2) + ":" + pad(duration.minutes(), 2) + ":" + pad(duration.seconds(), 2) +
-                    " " + (duration.asMilliseconds() / orignalDuration.asMilliseconds() * 100).toFixed(2) + "%";
+                var prettyDuration = pad(duration.hours(), 2) + ":" + pad(duration.minutes(), 2) + ":" + pad(duration.seconds(), 2);
+
+                // Calculate the percentage complete
+                var percentComplete = 100 - (duration.asMilliseconds() / orignalDuration.asMilliseconds() * 100);
 
                 // Set the timer element
                 timer.innerText = prettyDuration;
 
                 // Set the title
-                title.innerText = prettyDuration;
+                title.innerText = prettyDuration + " | " + percentComplete.toFixed(2) + "%";
+
+                // Set the background with to the percent complete
+                progress.style.width = percentComplete + "%";
             }, interval);
         });
     </script>
@@ -65,6 +71,7 @@
             padding: 0px;
             margin: 0px;
             height: 100%;
+            width: 100%;
         }
         h1 {
             margin: 0px;
@@ -75,9 +82,20 @@
 	        -ms-transform: translateY(-50%);
 	        -webkit-transform: translateY(-50%);
         }
+        #progress { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -999;
+            border: 0px;
+            background-color: #A4A4A4;
+        }
     </style>
 </head>
 <body>
     <h1 id="timer"></h1>
+    <div id="progress"></div>
 </body>
 </html>
