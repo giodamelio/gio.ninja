@@ -32,6 +32,7 @@
             var timer = document.getElementById("timer");
             var title = document.getElementById("title");
             var progress = document.getElementById("progress");
+            var percent = document.getElementById("percent");
 
             // Initilize our duration
             var duration = orignalDuration;
@@ -61,6 +62,9 @@
 
                 // Set the background with to the percent complete
                 progress.style.width = percentComplete + "%";
+
+                // Set the percent display
+                percent.innerText = percentComplete.toFixed(2) + "%";
             }, interval);
         });
     </script>
@@ -72,10 +76,10 @@
             margin: 0px;
             height: 100%;
             width: 100%;
+            font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
         }
         h1 {
             margin: 0px;
-            font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
             position: relative;
 	        top: 50%;
             transform: translateY(-50%);
@@ -92,10 +96,17 @@
             border: 0px;
             background-color: #A4A4A4;
         }
+        #percent {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
     <h1 id="timer"></h1>
     <div id="progress"></div>
+    <span id="percent"></span>
 </body>
 </html>
