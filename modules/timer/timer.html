@@ -9,6 +9,13 @@
 
     <!-- My Js -->
     <script>
+        // Pad a number
+        var pad = function(n, width, z) {
+            z = z || "0";
+            n = n + "";
+            return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+        };
+
         // Set how often we update the display
         var interval = 1000;
 
@@ -37,7 +44,7 @@
                 }
                 
                 // Get the text equivalent of the duration
-                var prettyDuration = duration.hours() + ":" + duration.minutes() + ":" + duration.seconds();
+                var prettyDuration = pad(duration.hours(), 2) + ":" + pad(duration.minutes(), 2) + ":" + pad(duration.seconds(), 2);
 
                 // Set the timer element
                 timer.innerText = prettyDuration;
