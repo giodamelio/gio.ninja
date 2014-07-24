@@ -24,13 +24,16 @@
         var unit = location.pathname.split("/")[2];
         
         // Calculate the time to count until
-        var duration = moment.duration(parseInt(increment), unit);
+        var orignalDuration = moment.duration(parseInt(increment), unit);
 
         // Wait until the dom is ready
         document.addEventListener("DOMContentLoaded", function() {
             // Get our display elements
             var timer = document.getElementById("timer");
             var title = document.getElementById("title");
+
+            // Initilize our duration
+            var duration = orignalDuration;
 
             // Display the countdown every interval
             var id = setInterval(function() {
@@ -44,7 +47,8 @@
                 }
                 
                 // Get the text equivalent of the duration
-                var prettyDuration = pad(duration.hours(), 2) + ":" + pad(duration.minutes(), 2) + ":" + pad(duration.seconds(), 2);
+                var prettyDuration = pad(duration.hours(), 2) + ":" + pad(duration.minutes(), 2) + ":" + pad(duration.seconds(), 2) +
+                    " " + (duration.asMilliseconds() / orignalDuration.asMilliseconds() * 100).toFixed(2) + "%";
 
                 // Set the timer element
                 timer.innerText = prettyDuration;
