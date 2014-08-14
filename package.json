@@ -8,6 +8,7 @@
   "dependencies": {
     "droll": "^0.1.1",
     "express": "^4.4.3",
+    "hapi": "^6.4.0",
     "keen.io": "^0.1.2",
     "lodash": "^2.4.1",
     "moment": "^2.7.0",
