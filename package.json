@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^2.3.0",
     "hapi": "^6.5.1"
   }
 }
