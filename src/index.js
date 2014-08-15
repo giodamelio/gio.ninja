@@ -6,26 +6,6 @@ var bluebird = require("bluebird");
 
 var server = new hapi.Server("localhost", 3141);
 
-// Serve the favicon
-server.route({
-    method: "GET",
-    path: "/favicon.ico",
-    handler: {
-        file: path.resolve(__dirname, "../favicon.ico")
-    }
-});
-
-// Serve shared static files
-server.route({
-    method: "GET",
-    path: "/static/{params*}",
-    handler: {
-        directory: {
-            path: path.resolve(__dirname, "../shared_static/")
-        }
-    }
-});
-
 // Serve the modules
 bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
     .map(function(moduleName) {
@@ -40,6 +20,30 @@ bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
             });
         });
     }))
+
+    // Serve the favicon
+    .then(function() {
+        server.route({
+            method: "GET",
+            path: "/favicon.ico",
+            handler: {
+                file: path.resolve(__dirname, "../favicon.ico")
+            }
+        });
+    })
+
+    // Serve shared static files
+    .then(function() {
+        server.route({
+            method: "GET",
+            path: "/static/{params*}",
+            handler: {
+                directory: {
+                    path: path.resolve(__dirname, "../shared_static/")
+                }
+            }
+        });
+    })
 
     // Start the server
     .then(function(modules) {
