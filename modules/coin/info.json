@@ -1,7 +1,0 @@
-{
-    "name": "coin",
-    "url": "/",
-    "alias": ["flip"],
-    "description": "Simple coin flip"
-}
-

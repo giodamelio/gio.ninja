@@ -1,9 +1,0 @@
-{
-    "name": "npm",
-    "url": "/$1",
-    "description": "NPM homepage redirect",
-    "args": {
-        "$1": "Package Name"
-    }
-}
-

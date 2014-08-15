@@ -1,7 +1,0 @@
-{
-    "name": "geoip",
-    "alias": ["gip"],
-    "url": "/",
-    "description": "Echo geoip data"
-}
-
