@@ -1,4 +1,6 @@
-Module = require("../../module");
+var path = require("path");
+
+var Module = require("../../module");
 
 module.exports = new Module({
     name: "timer",
@@ -7,9 +9,9 @@ module.exports = new Module({
 }, [
     {
         method: "GET",
-        path: "/",
-        handler: function(request, reply) {
-            reply("Hello World");
+        path: "/{increment}/{unit}",
+        handler: {
+            file: path.resolve(__dirname, "static/index.html")
         }
     }
 ]);

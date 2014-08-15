@@ -15,6 +15,17 @@ server.route({
     }
 });
 
+// Serve shared static files
+server.route({
+    method: "GET",
+    path: "/static/{params*}",
+    handler: {
+        directory: {
+            path: path.resolve(__dirname, "../shared_static/")
+        }
+    }
+});
+
 // Serve the modules
 bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
     .map(function(moduleName) {
