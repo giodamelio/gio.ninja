@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GeoIP</title>
+
+    <!-- CSS -->
+    <!-- Bootstrap -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">    
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 text-center">
+                {% if code < 400 %}
+                    <h1>Location: <a href="http://maps.google.com/?q={{data.city}}, {{data.region_code}} {{data.country_code3}}">{{data.city}}, {{data.region_code}} {{data.country_code3}}</a></h1>
+                    <h4>Timezone: {{data.timezone}}</h4>
+                    <h4>ISP: {{data.isp}}</h4>
+                    <h4>Latitude: {{data.latitude}}, Longitude: {{data.longitude}}</h4>
+                    <img src="http://maps.googleapis.com/maps/api/staticmap?center={{data.city}}, {{data.region_code}} {{data.country_code3}}&size=300x300">
+                {% else %}
+                    <h1>Error {{ code }}</h1>
+                    <h3>{{ data.message }}</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
