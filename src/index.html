@@ -42,9 +42,15 @@
                     <p>{{ module.description }}</p>
                 </div>
                 <div class="col-sm-6">
-                    <code>
-                        {{ module.vhosts | first }}.gio.ninja{{ module | renderModuleUrl }}
-                    </code>
+                    {% if module.args %}
+                        <code>
+                            {{ module.vhosts | first }}.gio.ninja{{ module | renderModuleUrl }}
+                        </code>
+                    {% else %}
+                        <code>
+                            {{ module.vhosts | first }}.gio.ninja
+                        </code>
+                    {% endif %}
                     <sup class="alias">
                         Alias: {{ module.vhosts | allButFirst | join(", ") }}
                     </sup>

@@ -4,7 +4,7 @@ var Module = require("../../module");
 
 module.exports = new Module({
     name: "timer",
-    description: "Simple count down timer",
+    description: "Count down timer",
     version: "0.1.0",
     vhosts: ["timer", "t"],
     url: "/%s/%s",
