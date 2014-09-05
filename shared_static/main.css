@@ -14,6 +14,11 @@ code {
     display: block;
 }
 
+/* Style the links */
+a.module, a.module:hover {
+    color: #333;
+}
+
 /* Style the alias elements */
 sup.alias {
     color: #848484;

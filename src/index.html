@@ -48,7 +48,11 @@
                         </code>
                     {% else %}
                         <code>
-                            {{ module.vhosts | first }}.gio.ninja
+                            <a
+                                class="module"
+                                href="http://{{ module.vhosts | first }}.gio.ninja">
+                                {{ module.vhosts | first }}.gio.ninja
+                            </a>
                         </code>
                     {% endif %}
                     <sup class="alias">
