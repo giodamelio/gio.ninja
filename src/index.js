@@ -23,6 +23,11 @@ var renderModuleUrl = function(module) {
 renderModuleUrl.safe = true;
 swig.setFilter("renderModuleUrl", renderModuleUrl);
 
+// Swig filter to give every element of an array but the first
+swig.setFilter("allButFirst", function(input) {
+    return input.slice(1);
+});
+
 // Create our server
 var server = new hapi.Server("localhost", 3141);
 

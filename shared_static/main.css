@@ -1,5 +1,22 @@
-/* Override bootstraps code color */
+/* Give the title row some bottom margin */
+.title-row {
+    margin-bottom: 25px;
+}
+
+/* Set the titles color */
+h1.title > a, h1.title > a:hover { 
+    color: #333
+}
+
+/* Style the code elements */
 code {
-    color: black;
+    color: #333;
+    display: block;
+}
+
+/* Style the alias elements */
+sup.alias {
+    color: #848484;
+    padding-left: 30px;
 }
 
