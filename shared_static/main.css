@@ -25,3 +25,8 @@ sup.alias {
     padding-left: 30px;
 }
 
+/* Hide an unecessary alias element */
+.hidden-alias {
+    visibility: hidden;
+}
+

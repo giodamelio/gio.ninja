@@ -37,7 +37,7 @@
         </div>
         <!-- Loop through modules and print them -->
         {% for module in modules %}
-            <div class="row">
+            <div class="row module-row">
                 <div class="col-sm-4 col-sm-offset-1">
                     <p>{{ module.description }}</p>
                 </div>
@@ -55,9 +55,15 @@
                             </a>
                         </code>
                     {% endif %}
-                    <sup class="alias">
-                        Alias: {{ module.vhosts | allButFirst | join(", ") }}
-                    </sup>
+
+                    <!-- Only show the alias element if there is more then one vhost -->
+                    {% if module.vhosts.length > 1 %}
+                        <sup class="alias">
+                            Alias: {{ module.vhosts | allButFirst | join(", ") }}
+                        </sup>
+                    {% else %}
+                        <sup class="hidden-alias">Nothing to see here</sup>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
