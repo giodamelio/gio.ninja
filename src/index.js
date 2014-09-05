@@ -1,14 +1,27 @@
 var path = require("path");
 var fs = require("fs");
+var util = require("util");
 
 var hapi = require("hapi");
 var swig = require("swig");
 var bluebird = require("bluebird");
 
+
 // If we are developing turn off swigs cache
 if (process.env.NODE_ENV == "development") {
     swig.setDefaults({ cache: false });
 }
+
+// Swig filter to render url with inputs
+var renderModuleUrl = function(module) {
+    return util.format.apply(null,
+            [module.url].concat(module.args.map(function(arg) {
+                return util.format("<input class=\"arg\" placeholder=\"%s\">", arg);
+            })
+    ));
+};
+renderModuleUrl.safe = true;
+swig.setFilter("renderModuleUrl", renderModuleUrl);
 
 // Create our server
 var server = new hapi.Server("localhost", 3141);
@@ -30,14 +43,15 @@ bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
 
     // Serve the homepage
     .then(function(modules) {
-        console.log(modules[0].register.attributes, server.info);
         server.route({
             method: "GET",
             path: "/",
             vhost: server.info.host,
             handler: function(request, reply) {
                 swig.renderFile(path.resolve(__dirname, "index.html"), {
-                    modules: modules,
+                    modules: modules.map(function(module) {
+                        return module.register.attributes;
+                    }),
                     info: server.info
                 }, function(err, output) {
                     if (err) console.log(err);
@@ -71,11 +85,32 @@ bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
         });
     })
 
+    // Debug the requests
+    .then(function() {
+        return new bluebird(function(resolve, reject) {
+            server.pack.register({
+                plugin: require("../../request-debugger"),
+                options: {}
+            }, function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    })
+
     // Start the server
-    .then(function(modules) {
+    .then(function() {
         server.start(function() {
             console.log("Server running at:", server.info.uri);
         });
+    })
+
+    // Catch errors
+    .catch(function(error) {
+        console.log(error);
     });
 
 

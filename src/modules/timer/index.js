@@ -7,11 +7,11 @@ module.exports = new Module({
     description: "Simple count down timer",
     version: "0.1.0",
     vhosts: ["timer", "t"],
-    url: "/$1/$2/",
-    args: {
-        "$1": "Increment",
-        "$2": "Unit"
-    }
+    url: "/%s/%s",
+    args: [
+        "Increment",
+        "Unit"
+    ]
 }, [
     {
         method: "GET",
