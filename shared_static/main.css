@@ -1,5 +1,5 @@
-/* Give the title row some bottom margin */
-.title-row {
+/* Give the title and info rows some bottom margin */
+.title-row, .info-row {
     margin-bottom: 25px;
 }
 
