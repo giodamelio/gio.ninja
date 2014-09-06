@@ -29,7 +29,7 @@ swig.setFilter("allButFirst", function(input) {
 });
 
 // Create our server
-var server = new hapi.Server("localhost", 3141);
+var server = new hapi.Server("0.0.0.0", 3141);
 
 // Serve the modules
 bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
