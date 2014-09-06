@@ -90,22 +90,6 @@ bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
         });
     })
 
-    // Debug the requests
-    .then(function() {
-        return new bluebird(function(resolve, reject) {
-            server.pack.register({
-                plugin: require("../../request-debugger"),
-                options: {}
-            }, function(err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
-    })
-
     // Start the server
     .then(function() {
         server.start(function() {
