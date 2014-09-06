@@ -11,6 +11,7 @@ h1.title > a, h1.title > a:hover {
 /* Style the code elements */
 code {
     color: #333;
+    background: none;
     display: block;
 }
 
