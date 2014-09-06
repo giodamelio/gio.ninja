@@ -1,4 +1,5 @@
 node_modules/
+.gio.ninjarc
 .env
 .session.vim
 

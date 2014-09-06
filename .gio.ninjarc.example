@@ -1,0 +1,6 @@
+; Default port
+port = 3141
+
+; Default host
+host = localhost
+

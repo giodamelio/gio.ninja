@@ -6,6 +6,7 @@ var hapi = require("hapi");
 var swig = require("swig");
 var bluebird = require("bluebird");
 
+var config = require("./config");
 
 // If we are developing turn off swigs cache
 if (process.env.NODE_ENV == "development") {
@@ -29,7 +30,7 @@ swig.setFilter("allButFirst", function(input) {
 });
 
 // Create our server
-var server = new hapi.Server("localhost", process.env.PORT || 3141);
+var server = new hapi.Server("localhost", config.port);
 
 // Serve the modules
 bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
@@ -51,7 +52,7 @@ bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
         server.route({
             method: "GET",
             path: "/",
-            vhost: process.env.HOST,
+            vhost: config.host,
             handler: function(request, reply) {
                 swig.renderFile(path.resolve(__dirname, "index.html"), {
                     modules: modules.map(function(module) {

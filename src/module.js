@@ -1,3 +1,5 @@
+var config = require("./config");
+
 module.exports = function(attributes, routes) {
     // Add our routes to the server
     this.register = function(plugin, options, next) {
@@ -6,7 +8,7 @@ module.exports = function(attributes, routes) {
             // Loop through the routes and add the vhost option
             routes.map(function(route) {
                 route.vhost = attributes.vhosts.map(function(vhost) {
-                     return vhost + "." + process.env.HOST;
+                     return vhost + "." + config.host;
                 });
             });
 
