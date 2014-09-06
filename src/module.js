@@ -6,7 +6,7 @@ module.exports = function(attributes, routes) {
             // Loop through the routes and add the vhost option
             routes.map(function(route) {
                 route.vhost = attributes.vhosts.map(function(vhost) {
-                     return vhost + "." + server.info.host;
+                     return vhost + "." + process.env.HOST;
                 });
             });
 

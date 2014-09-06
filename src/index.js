@@ -51,7 +51,7 @@ bluebird.all(fs.readdirSync(path.resolve(__dirname, "modules"))
         server.route({
             method: "GET",
             path: "/",
-            vhost: server.info.host,
+            vhost: process.env.HOST,
             handler: function(request, reply) {
                 swig.renderFile(path.resolve(__dirname, "index.html"), {
                     modules: modules.map(function(module) {
