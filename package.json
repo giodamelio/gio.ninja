@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
+    "async": "^0.9.0",
     "bluebird": "^2.3.0",
     "droll": "^0.1.1",
     "hapi": "^6.5.1",

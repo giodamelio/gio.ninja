@@ -4,3 +4,7 @@ port = 3141
 ; Default host
 host = localhost
 
+[tv]
+; Trakt.tv api key
+api_key = <your api key>
+
